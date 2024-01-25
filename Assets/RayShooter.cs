@@ -5,6 +5,7 @@ using UnityEngine;
 public class RayShooter : MonoBehaviour
 {
     private Camera _camera;
+    private Vector3 hitPoint;
 
     // Start is called before the first frame update
     void Start()
@@ -14,10 +15,19 @@ public class RayShooter : MonoBehaviour
         Cursor.visible = false;
     }
 
+
     private void OnDestroy()
     {
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
+    }
+
+    void OnGUI()
+    {
+        if (hitPoint != null)
+        {
+            GUI.Label(new Rect(10, 10, 100, 20), hitPoint.ToString());
+        }
     }
 
     // Update is called once per frame
@@ -32,15 +42,20 @@ public class RayShooter : MonoBehaviour
             {
                 Debug.Log("Hit " + hit.point);
                 StartCoroutine(SphereIndicator(hit.point));
+                hitPoint = hit.point;
             }
         }
     }
 
+    //  Coroutines are processes specifically denoted by the use of IEnumerator.
+    //  StartCoroutine() above takes in IEnumerator type parameter to run a task 
+    //  called SphereIndicator below. 
     private IEnumerator SphereIndicator(Vector3 pos)
     {
         GameObject sphere = GameObject.CreatePrimitive(PrimitiveType.Sphere);
         sphere.transform.position = pos;
         yield return new WaitForSeconds(1);
         Destroy(sphere);
+        hitPoint = new Vector3();
     }
 }
