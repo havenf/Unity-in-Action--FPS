@@ -42,6 +42,12 @@ public class RayShooter : MonoBehaviour
             {
                 Debug.Log("Hit " + hit.point);
                 StartCoroutine(SphereIndicator(hit.point));
+                Rigidbody rb = hit.transform.GetComponent<Rigidbody>();
+                if (rb != null)
+                {
+                    Vector3 forceDirection = hit.point - _camera.transform.position;
+                    rb.AddForce(forceDirection.normalized * 1000f);
+                }
                 hitPoint = hit.point;
             }
         }
