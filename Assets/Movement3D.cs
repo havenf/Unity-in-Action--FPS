@@ -7,8 +7,8 @@ using UnityEngine;
 public class Movement3D : MonoBehaviour
 {
     private float speed = 2.2f;
-    private float sensitivityHor = 4.0f;
-    private float sensitivityVert = 4.0f;
+    private float sensitivityHor = 3.0f;
+    private float sensitivityVert = 1.0f;
     private float minimumVert = -45.0f;
     private float maximumVert = 45.0f;
     private float jumpForce = 3.0f;
