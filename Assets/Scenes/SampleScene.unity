@@ -1530,7 +1530,7 @@ GameObject:
   - component: {fileID: 1604293925}
   - component: {fileID: 1604293924}
   m_Layer: 0
-  m_Name: EnemyController
+  m_Name: SceneController
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
