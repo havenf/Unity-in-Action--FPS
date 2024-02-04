@@ -33,22 +33,38 @@ public class RayShooter : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //LMB Trigger
         if (_camera != null && Input.GetMouseButtonDown(0))
         {
+
             Vector3 point = new Vector3(_camera.pixelWidth / 2, _camera.pixelHeight / 2, 0);
+
             Ray ray = _camera.ScreenPointToRay(point);
+
             RaycastHit hit;
+
             if (Physics.Raycast(ray, out hit))
             {
                 Debug.Log("Hit " + hit.point);
+
                 StartCoroutine(SphereIndicator(hit.point));
+
                 Rigidbody rb = hit.transform.GetComponent<Rigidbody>();
+
                 if (rb != null)
                 {
                     Vector3 forceDirection = hit.point - _camera.transform.position;
-                    rb.AddForce(forceDirection.normalized * 1000f);
+                    rb.AddForce(forceDirection.normalized * 100f);
                 }
+
                 hitPoint = hit.point;
+
+                WanderingAI wanderingAI = hit.transform.GetComponent<WanderingAI>();
+
+                if (wanderingAI != null)
+                {
+                    wanderingAI.ReactToHit();
+                }
             }
         }
     }
@@ -58,10 +74,10 @@ public class RayShooter : MonoBehaviour
     //  called SphereIndicator below. 
     private IEnumerator SphereIndicator(Vector3 pos)
     {
-        GameObject sphere = GameObject.CreatePrimitive(PrimitiveType.Sphere);
-        sphere.transform.position = pos;
+        // GameObject sphere = GameObject.CreatePrimitive(PrimitiveType.Sphere);
+        // sphere.transform.position = pos;
         yield return new WaitForSeconds(1);
-        Destroy(sphere);
+        // Destroy(sphere);
         hitPoint = new Vector3();
     }
 }
