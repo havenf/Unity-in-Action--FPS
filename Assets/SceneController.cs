@@ -1,11 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class SceneController : MonoBehaviour
 {
     [SerializeField] private GameObject enemyPrefab;
+    [SerializeField] private Material enemyMaterial;
+
     private GameObject _enemy;
+
+    Renderer enemyRenderer;
+
     void Update()
     {
         if (_enemy == null)
@@ -21,6 +27,9 @@ public class SceneController : MonoBehaviour
 
             Color randomColor = new Color(Random.Range(0f, 1f), Random.Range(0f, 1f), Random.Range(0f, 1f));
             _enemy.GetComponent<Renderer>().material.color = randomColor;
+
+            enemyRenderer = _enemy.GetComponent<Renderer>();
+            enemyRenderer.material = enemyMaterial;
         }
     }
 }

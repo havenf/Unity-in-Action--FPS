@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Fireball : MonoBehaviour
 {
-    public float speed = 10.0f;
+    private float speed = 1.0f;
     public int damage = 1;
 
     void Update()
@@ -35,7 +35,7 @@ public class Fireball : MonoBehaviour
 
     private IEnumerator Extinguish()
     {
-        yield return new WaitForSeconds(0.1f);
+        yield return new WaitForSeconds(0.3f);
         Destroy(this.gameObject);
         Debug.Log("Fireball extinguished");
     }

@@ -11,7 +11,7 @@ public class WanderingAI : MonoBehaviour
     private void Start()
     {
         _alive = true;
-        fireballPrefab = Resources.Load<GameObject>("Assets/Fireball.prefab");
+        fireballPrefab = (GameObject)Resources.Load("Fireball");
         StartCoroutine(ShootFireballCoroutine());
     }
 
@@ -33,17 +33,17 @@ public class WanderingAI : MonoBehaviour
         }
     }
 
-    private IEnumerator ShootFireballCoroutine()
+    public IEnumerator ShootFireballCoroutine()
     {
         while (_alive)
         {
             // if (fireballPrefab != null)
             // {
             GameObject fireball = Instantiate(fireballPrefab, transform.position, transform.rotation);
-            fireball.GetComponent<Rigidbody>().velocity = transform.forward * 10f;
+            fireball.GetComponent<Rigidbody>().velocity = transform.forward * 1f;
             // }
 
-            yield return new WaitForSeconds(Random.Range(1f, 3f));
+            yield return new WaitForSeconds(0.5f);
         }
     }
 
